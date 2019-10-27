@@ -1,0 +1,9 @@
+package damageAid;
+
+public class damageAidControl {
+
+	public AnchorPane getViewPartToApp()
+	
+	
+	
+}

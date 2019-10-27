@@ -1,0 +1,13 @@
+package damageAid;
+
+import javafx.scene.layout.AnchorPane;
+
+public class damageAidControl {
+
+	public AnchorPane getViewPartToApp()
+	{
+		
+	}
+	
+	
+}

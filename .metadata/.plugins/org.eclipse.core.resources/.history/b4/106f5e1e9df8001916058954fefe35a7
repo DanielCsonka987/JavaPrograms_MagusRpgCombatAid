@@ -1,0 +1,22 @@
+package damageAid;
+
+import java.io.IOException;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
+
+public class damageAidControl {
+
+	public AnchorPane getViewPartToApp()
+	{
+		try {
+			return (AnchorPane)FXMLLoader.load(getClass().getResource("DamageAidView.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+}
