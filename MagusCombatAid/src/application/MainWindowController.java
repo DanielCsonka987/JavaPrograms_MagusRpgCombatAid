@@ -29,9 +29,6 @@ public class MainWindowController implements Initializable{
     private ComboBox<String> cmbBxAttackAreaGroup;
 
     @FXML
-    private Button btnRollD10Alone;
-
-    @FXML
     private ComboBox<String> cmbBxAttackStrength;
 
     @FXML
@@ -39,6 +36,9 @@ public class MainWindowController implements Initializable{
 
     @FXML
     private Label lblInfoOfTable;
+    
+    @FXML
+    private Button btnRollD10Alone;
 
     @FXML
     private AnchorPane paneInfoArea;

@@ -1,7 +1,0 @@
-package application;
-
-public class MainWindowController {
-    @FXML
-    private Tab damageAid;
-
-}

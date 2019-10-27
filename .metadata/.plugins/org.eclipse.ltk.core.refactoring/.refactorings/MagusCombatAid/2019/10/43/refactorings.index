@@ -1,2 +1,9 @@
 1572168931495	Rename type 'damageAidControl'
 1572169268568	Delete element
+1572173642246	Rename compilation unit 'magusDBInterface.java'
+1572196389353	Rename local variable 'tablename'
+1572196408235	Rename local variable 'tablename'
+1572198759147	Rename method 'executeNewNonPrepQuery'
+1572198872348	Rename method 'getSingleRowContnet'
+1572199658162	Rename method 'processOfRowResultWithColumnNames'
+1572200010451	Rename type 'IDao'
