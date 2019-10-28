@@ -23,7 +23,7 @@ public class MainWindowController implements Initializable{
     private Pane paneControlArea;
 
     @FXML
-    private ComboBox<String> cmbBxWeaponGroup;
+    private ComboBox<String> cmbBxWeaponTypes;
 
     @FXML
     private ComboBox<String> cmbBxAttackAreaGroup;

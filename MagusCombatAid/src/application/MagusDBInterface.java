@@ -73,9 +73,24 @@ public class MagusDBInterface implements IDaoDamageAid{
 	}
 
 	/*
+	 * THIS METHOD IS TO LOAD IN COMMENT FROM DB
+	 */
+	public static String getTheValueOfASpecificCell(String sql, String[] prepDatas){
+		
+		ResultSet datas = executeNewPrepQuery(sql, prepDatas);
+		try {
+			return datas.getString(0);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
+	/*
 	 * THIS METHOD IS TO CLOSE THE EXISTING CONNECTION WITH EMBEDED DB 
 	 */
 	public static void closeDBConnection(){
+		
 		try {
 			pstmt.close();
 			conn.close();
@@ -87,6 +102,7 @@ public class MagusDBInterface implements IDaoDamageAid{
 		
 	//DATA RECEIVING FROM DB
 	private static ResultSet executeNewPrepQuery(String sql, String[] prepDatas){
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			for(int i = 0; i< prepDatas.length; i++ ){
@@ -100,6 +116,7 @@ public class MagusDBInterface implements IDaoDamageAid{
 	}
 	
 	private static ResultSet executeNewPrepQuery_WithStarterDatas(String sql){
+		
 		try {
 			/*
 			Statement stmt = conn.createStatement();
@@ -116,6 +133,7 @@ public class MagusDBInterface implements IDaoDamageAid{
 	
 	//DATA PROCESSINGS
 	private static Map<String, String> processOfParalelColumnResult(ResultSet datas){
+		
 		Map<String, String> result = new LinkedHashMap<String, String>();
 		try {
 			while (datas.next()){
@@ -129,11 +147,12 @@ public class MagusDBInterface implements IDaoDamageAid{
 	}
 	
 	private static Map<String, String> processOfRowResult_WithColumnNames(ResultSet datas){
+		
 		Map<String, String> result = new TreeMap<String, String>();
 		try {
 			Integer columnAmount = datas.getMetaData().getColumnCount();
 			for(int i = 0; i< columnAmount; i++){
-				result.put(datas.getMetaData().getColumnName(i), datas.getString(i));
+				result.put(datas.getString(i), datas.getMetaData().getColumnName(i));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,6 +162,7 @@ public class MagusDBInterface implements IDaoDamageAid{
 	}
 	
 	private static String[] processOfParirOfCellResult(ResultSet datas){
+		
 		String[] result = new String[2];
 		try {
 			result[0] = datas.getString(0);
