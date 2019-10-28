@@ -24,7 +24,7 @@ public class MagusDamageAidLogic {
 	private static String changeKeyWordFromHPHeaderToEffectHeader = "affect";
 	
 	private static String queryToGetWeaponTypes = 
-			"SELECT weapon_type, damages_group FROM ?;";
+			"SELECT weapon_type, damages_group FROM ";
 	
 	//AREA COLLECTION TABLE
 	private static String queryToGetChosenAreaCollectionColumns = 

@@ -49,6 +49,8 @@ public class MagusDBInterface implements IDaoDamageAid{
 			datas = executeNewPrepQuery_WithStarterDatas(sql);
 		else
 			datas = executeNewPrepQuery(sql, prepDatas);
+		if(datas == null )
+			System.err.println("No datas from DB");
 		return processOfParalelColumnResult(datas);
 	}
 	
@@ -118,13 +120,9 @@ public class MagusDBInterface implements IDaoDamageAid{
 	private static ResultSet executeNewPrepQuery_WithStarterDatas(String sql){
 		
 		try {
-			/*
+			
 			Statement stmt = conn.createStatement();
-			return stmt.executeQuery(sql);
-			*/
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(0, starterTableOfDB);
-			return pstmt.executeQuery();
+			return stmt.executeQuery(sql + starterTableOfDB + ";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -137,7 +135,7 @@ public class MagusDBInterface implements IDaoDamageAid{
 		Map<String, String> result = new LinkedHashMap<String, String>();
 		try {
 			while (datas.next()){
-				result.put(datas.getString(0), datas.getString(1));
+				result.put(datas.getString(1), datas.getString(2));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
