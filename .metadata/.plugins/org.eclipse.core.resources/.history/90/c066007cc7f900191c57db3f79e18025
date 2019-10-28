@@ -22,43 +22,37 @@ public class MainWindowController implements Initializable{
 
     @FXML
     private Pane paneControlArea;
+    @FXML
+    private AnchorPane paneInfoArea;
 
     @FXML
     private ComboBox<String> cmbBxWeaponTypes;
-
     @FXML
     private ComboBox<String> cmbBxAttackAreaGroup;
-
-    @FXML
-    private Button btnRollD10Alone;
-
     @FXML
     private ComboBox<String> cmbBxAttackStrength;
-
     @FXML
     private ComboBox<String> cmbBxAttackArea;
 
     @FXML
     private Label lblInfoOfTable;
-
-    @FXML
-    private Button btnAreaDefined;
-
-    @FXML
-    private Button btnClear;
-
-    @FXML
-    private AnchorPane paneInfoArea;
-
-    @FXML
-    private TextArea txtAreaDescript;
-
-    @FXML
-    private TextArea txtAreaEffect;
-
     @FXML
     private Label lblInfoOfRow;
 
+
+    @FXML
+    private TextArea txtAreaDescript;
+    @FXML
+    private TextArea txtAreaEffect;
+
+
+    
+    @FXML
+    private Button btnAreaDefined;
+    @FXML
+    private Button btnRollD10Alone;
+    @FXML
+    private Button btnClear;
 
     private MagusDamageAidLogic service;
 	private String chosenWeaponType;
@@ -129,6 +123,19 @@ public class MainWindowController implements Initializable{
     	String tableComment = service.getTheStictCommentOfAreaGroup();
     	lblInfoOfTable.setText(tableComment);
     }
+	
+	
+	
+	
+	
+    @FXML
+    void loadInTheAreaCollection(ActionEvent event) {
+    	
+
+    }
+
+
+
 
     private Boolean fillingInStatesRevisor(FormCompliteness state){
     	

@@ -24,19 +24,19 @@ public class MainWindowController implements Initializable{
     private Pane paneControlArea;
 
     @FXML
-    private ComboBox<String> cmbBxWeaponTypes;
+    private ComboBox<?> cmbBxWeaponTypes;
 
     @FXML
-    private ComboBox<String> cmbBxAttackAreaGroup;
+    private ComboBox<?> cmbBxAttackAreaGroup;
 
     @FXML
     private Button btnRollD10Alone;
 
     @FXML
-    private ComboBox<String> cmbBxAttackStrength;
+    private ComboBox<?> cmbBxAttackStrength;
 
     @FXML
-    private ComboBox<String> cmbBxAttackArea;
+    private ComboBox<?> cmbBxAttackArea;
 
     @FXML
     private Label lblInfoOfTable;

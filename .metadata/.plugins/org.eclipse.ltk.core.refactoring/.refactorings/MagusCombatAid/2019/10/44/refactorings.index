@@ -36,3 +36,5 @@
 1572289547826	Rename method 'getBackKeyAreaByItsValueDice'
 1572293108850	Rename method 'getTheStictCommentOfAreasOfChosenAreaGroup'
 1572293275229	Rename field 'damage_chosenAreaGroupName'
+1572296181744	Rename enum constant 'CHOSEN_HP'
+1572296205656	Rename enum constant 'CHOSEN_HPORAREA'

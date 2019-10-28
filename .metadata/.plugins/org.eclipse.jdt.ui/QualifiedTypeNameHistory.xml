@@ -30,6 +30,8 @@
 <fullyQualifiedTypeName name="javafx.collections.ObservableList"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
-<fullyQualifiedTypeName name="application.MagusDamageAidLogic"/>
 <fullyQualifiedTypeName name="application.MagusDBInterface"/>
+<fullyQualifiedTypeName name="application.MagusDamageAidLogic"/>
+<fullyQualifiedTypeName name="java.awt.Desktop.Action"/>
+<fullyQualifiedTypeName name="application.MainWindowController.FormCompliteness"/>
 </qualifiedTypeNameHistroy>

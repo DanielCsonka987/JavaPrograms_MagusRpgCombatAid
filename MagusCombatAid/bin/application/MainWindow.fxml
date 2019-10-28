@@ -20,8 +20,8 @@
                      <children>
                         <Pane fx:id="paneControlArea" layoutX="25.0" layoutY="26.0" prefHeight="320.0" prefWidth="200.0">
                            <children>
-                              <ComboBox fx:id="cmbBxWeaponTypes" layoutX="18.0" layoutY="38.0" prefWidth="150.0" />
-                              <ComboBox fx:id="cmbBxAttackAreaGroup" layoutX="18.0" layoutY="92.0" prefWidth="150.0" />
+                              <ComboBox fx:id="cmbBxWeaponTypes" layoutX="18.0" layoutY="38.0" onAction="#loadInTheAreaCollection" prefWidth="150.0" />
+                              <ComboBox fx:id="cmbBxAttackAreaGroup" layoutX="18.0" layoutY="92.0" onAction="#loadInAreaGroupDetails" prefWidth="150.0" />
                               <Button fx:id="btnRollD10Alone" layoutX="18.0" layoutY="271.0" mnemonicParsing="false" onAction="#defineTheStrictArea" text="Kidobás elvégzése" />
                               <Label layoutX="18.0" layoutY="16.0" text="Támadó fegyverének típusa:" />
                               <Label layoutX="18.0" layoutY="71.0" text="Támadás célja:" />
@@ -30,6 +30,8 @@
                               <ComboBox fx:id="cmbBxAttackArea" layoutX="18.0" layoutY="236.0" prefHeight="25.0" prefWidth="112.0" />
                               <Label layoutX="18.0" layoutY="215.0" text="Csapás területe (k10):" />
                               <Label fx:id="lblInfoOfTable" layoutX="18.0" layoutY="127.0" text="Label" />
+                              <Button fx:id="btnAreaDefined" layoutX="141.0" layoutY="236.0" mnemonicParsing="false" onAction="#defineWithGivenArea" text="Betölt" />
+                              <Button fx:id="btnClear" layoutX="141.0" layoutY="271.0" mnemonicParsing="false" onAction="#clearAreas" prefHeight="25.0" prefWidth="48.0" text="Töröl" />
                            </children>
                         </Pane>
                         <AnchorPane fx:id="paneInfoArea" layoutX="236.0" layoutY="26.0" prefHeight="320.0" prefWidth="340.0">
