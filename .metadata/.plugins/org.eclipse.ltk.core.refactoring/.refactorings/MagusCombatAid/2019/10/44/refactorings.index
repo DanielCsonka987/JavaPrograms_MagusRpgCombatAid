@@ -38,3 +38,12 @@
 1572293275229	Rename field 'damage_chosenAreaGroupName'
 1572296181744	Rename enum constant 'CHOSEN_HP'
 1572296205656	Rename enum constant 'CHOSEN_HPORAREA'
+1572332317856	Delete element
+1572343755762	Rename method 'getTheAreaCollectionOfChosenWeapon'
+1572343770676	Rename method 'getTheStrictAreaRowFromChosenAreaGroup'
+1572343782030	Rename method 'getTheStictCommentOfAreaGroup'
+1572343788234	Rename method 'getTheStirctCommentOfArea'
+1572343829396	Rename method 'getTheStrinctAreaGroupHPRow'
+1572343845489	Rename method 'getTheCellPariOfStrictAreaAndHP'
+1572343866141	Rename method 'getTheCellPariOfStrictAreaAndHP'
+1572345090512	Rename method 'loadDetailsToFields'

@@ -26,7 +26,7 @@ public class TestMagusDamageAidLogic {
 	public void test2_FirstSelection(){
 		ObservableList<String> logWeapons = MagusDamageAidLogic.getDamageAidLogic().getWeaponTypes();
 		ObservableList<String> logAreaColl = MagusDamageAidLogic.getDamageAidLogic()
-		.getTheAreaCollectionOfChosenWeapon(logWeapons.get(1));
+		.getTheAreaCollection_OfChosenWeapon(logWeapons.get(1));
 		
 		if(logAreaColl.size() != 5)
 			fail("1-Not enough element: " + logAreaColl.size());
@@ -46,10 +46,10 @@ public class TestMagusDamageAidLogic {
 	public void test3_SecondSelection(){
 		ObservableList<String> logWeapons = MagusDamageAidLogic.getDamageAidLogic().getWeaponTypes();
 		ObservableList<String> logAreaColl = MagusDamageAidLogic.getDamageAidLogic()
-				.getTheAreaCollectionOfChosenWeapon(logWeapons.get(1));
+				.getTheAreaCollection_OfChosenWeapon(logWeapons.get(1));
 		
 		ObservableList<String> logAreaChosen_AreaList =
-				MagusDamageAidLogic.getTheStrictAreaRowFromChosenAreaGroup(logAreaColl.get(0));
+				MagusDamageAidLogic.getTheStrictAreaRow_OfChosenAreaGroup(logAreaColl.get(0));
 		
 		if(logAreaChosen_AreaList.size() != 5)
 			fail("1-Not enough values");
@@ -71,12 +71,12 @@ public class TestMagusDamageAidLogic {
 	public void test4_ThirdSelection_OnlySelection(){
 		ObservableList<String> logWeapons = MagusDamageAidLogic.getDamageAidLogic().getWeaponTypes();
 		ObservableList<String> logAreaColl = MagusDamageAidLogic.getDamageAidLogic()
-				.getTheAreaCollectionOfChosenWeapon(logWeapons.get(1));
+				.getTheAreaCollection_OfChosenWeapon(logWeapons.get(1));
 		ObservableList<String> logAreaChosen_AreaList =
-				MagusDamageAidLogic.getTheStrictAreaRowFromChosenAreaGroup(logAreaColl.get(0));
+				MagusDamageAidLogic.getTheStrictAreaRow_OfChosenAreaGroup(logAreaColl.get(0));
 		
 		ObservableList<String> logAreaChosen_HPList = MagusDamageAidLogic
-				.getDamageAidLogic().getTheStrinctAreaGroupHPRow();
+				.getDamageAidLogic().getTheStrinctAreaGroup_HPRow();
 		
 		if(logAreaChosen_HPList.size() != 4)
 			fail("1-Not eonough values");
@@ -95,14 +95,14 @@ public class TestMagusDamageAidLogic {
 	public void test5_ThirdSelectionAndFinish_OnlySelection(){
 		ObservableList<String> logWeapons = MagusDamageAidLogic.getDamageAidLogic().getWeaponTypes();
 		ObservableList<String> logAreaColl = MagusDamageAidLogic.getDamageAidLogic()
-				.getTheAreaCollectionOfChosenWeapon(logWeapons.get(1));			//ZÚZÓFEGYVER
+				.getTheAreaCollection_OfChosenWeapon(logWeapons.get(1));			//ZÚZÓFEGYVER
 		ObservableList<String> logAreaChosen_AreaList =
-				MagusDamageAidLogic.getTheStrictAreaRowFromChosenAreaGroup(logAreaColl.get(0));	//FEJ AREA_GROUP-> AREAS
+				MagusDamageAidLogic.getTheStrictAreaRow_OfChosenAreaGroup(logAreaColl.get(0));	//FEJ AREA_GROUP-> AREAS
 		ObservableList<String> logAreaChosen_HPList = MagusDamageAidLogic
-				.getDamageAidLogic().getTheStrinctAreaGroupHPRow();		//HP LIST BY AREA_GROUP
+				.getDamageAidLogic().getTheStrinctAreaGroup_HPRow();		//HP LIST BY AREA_GROUP
 		
 		String[] result = MagusDamageAidLogic.getDamageAidLogic()		//HOMOK + 3-4 Ép
-				.getTheCellPariOfStrictAreaAndHP(logAreaChosen_AreaList.get(1), logAreaChosen_HPList.get(1));
+				.getTheCellPari_OfStrictAreaAndHP(logAreaChosen_AreaList.get(1), logAreaChosen_HPList.get(1));
 		
 		if(!result[0].equals("A csapás zúzott sebet ejt a homlokon, de nem szakítja át.") 
 				|| !result[1].equals("Szédülés. Gyenge fájdalom."))
@@ -115,14 +115,14 @@ public class TestMagusDamageAidLogic {
 	public void test6_ThirdSelectionAndFinish_DirectRNDInjection(){
 		ObservableList<String> logWeapons = MagusDamageAidLogic.getDamageAidLogic().getWeaponTypes();
 		ObservableList<String> logAreaColl = MagusDamageAidLogic.getDamageAidLogic()
-				.getTheAreaCollectionOfChosenWeapon(logWeapons.get(1));		//ZÚZÓFEGYVER
+				.getTheAreaCollection_OfChosenWeapon(logWeapons.get(1));		//ZÚZÓFEGYVER
 		ObservableList<String> logAreaChosen_AreaList =
-				MagusDamageAidLogic.getTheStrictAreaRowFromChosenAreaGroup(logAreaColl.get(0));	//FEJ AREA_GROUP-> AREAS
+				MagusDamageAidLogic.getTheStrictAreaRow_OfChosenAreaGroup(logAreaColl.get(0));	//FEJ AREA_GROUP-> AREAS
 		ObservableList<String> logAreaChosen_HPList = MagusDamageAidLogic
-				.getDamageAidLogic().getTheStrinctAreaGroupHPRow();	//HP LIST BY AREA_GROUP
+				.getDamageAidLogic().getTheStrinctAreaGroup_HPRow();	//HP LIST BY AREA_GROUP
 		
 		String[] result = MagusDamageAidLogic.getDamageAidLogic()		//HOMOK RND LIKE (3) + 3-4 Ép
-				.getTheCellPariOfStrictAreaAndHP(3, logAreaChosen_HPList.get(1));
+				.getTheCellPari_OfStrictAreaAndHP(3, logAreaChosen_HPList.get(1));
 		
 		if(!result[0].equals("A csapás zúzott sebet ejt a homlokon, de nem szakítja át.") 
 				|| !result[1].equals("Szédülés. Gyenge fájdalom."))
@@ -135,18 +135,18 @@ public class TestMagusDamageAidLogic {
 	public void test7_ThirdSelectionAndFinish_OnlySelection(){
 		ObservableList<String> logWeapons = MagusDamageAidLogic.getDamageAidLogic().getWeaponTypes();
 		ObservableList<String> logAreaColl = MagusDamageAidLogic.getDamageAidLogic()
-				.getTheAreaCollectionOfChosenWeapon(logWeapons.get(0));			//SZÚRÓFEGYVER
+				.getTheAreaCollection_OfChosenWeapon(logWeapons.get(0));			//SZÚRÓFEGYVER
 		if(!logWeapons.get(0).equals("Szúrófegyverek"))
 			fail("1-Not good order!" + logWeapons.get(0));
 		ObservableList<String> logAreaChosen_AreaList =
-				MagusDamageAidLogic.getTheStrictAreaRowFromChosenAreaGroup(logAreaColl.get(4));	//LÁB AREA GROUP
+				MagusDamageAidLogic.getTheStrictAreaRow_OfChosenAreaGroup(logAreaColl.get(4));	//LÁB AREA GROUP
 		if(!logAreaColl.get(4).equals("Láb"))
 			fail("2-Not good order!" + logAreaColl.get(4));
 		ObservableList<String> logAreaChosen_HPList = MagusDamageAidLogic
-				.getDamageAidLogic().getTheStrinctAreaGroupHPRow();	
+				.getDamageAidLogic().getTheStrinctAreaGroup_HPRow();	
 		
 		String[] result = MagusDamageAidLogic.getDamageAidLogic()		//LÁBFEJ + 5-6 Ép
-				.getTheCellPariOfStrictAreaAndHP(logAreaChosen_AreaList.get(4), logAreaChosen_HPList.get(2));
+				.getTheCellPari_OfStrictAreaAndHP(logAreaChosen_AreaList.get(4), logAreaChosen_HPList.get(2));
 		
 		if(!result[0].equals("A fegyver átdöfi a lábfejet, a földhöz szegezi. Csontok törnek, szalagok szakadnak.") 
 				|| !result[1].equals("Mérsékelt fájdalom. Jelentős hátrány. Gyenge vérzés. Lábfej Részleges bénulása. Haladási sebesség: 50%"))
@@ -159,12 +159,12 @@ public class TestMagusDamageAidLogic {
 		
 		ObservableList<String> logWeapons = MagusDamageAidLogic.getDamageAidLogic().getWeaponTypes();
 		ObservableList<String> logAreaColl = MagusDamageAidLogic.getDamageAidLogic()
-				.getTheAreaCollectionOfChosenWeapon(logWeapons.get(0));			//SZÚRÓFEGYVER
+				.getTheAreaCollection_OfChosenWeapon(logWeapons.get(0));			//SZÚRÓFEGYVER
 		ObservableList<String> logAreaChosen_AreaList =
-				MagusDamageAidLogic.getTheStrictAreaRowFromChosenAreaGroup(logAreaColl.get(2));	//TÖRZS ELÖL AREA GROUP
+				MagusDamageAidLogic.getTheStrictAreaRow_OfChosenAreaGroup(logAreaColl.get(2));	//TÖRZS ELÖL AREA GROUP
 		
 		String commentPierce = MagusDamageAidLogic.getDamageAidLogic()
-				.getTheStictCommentOfAreaGroup();
+				.getTheStictComment_OfAreaGroup();
 		
 		if(!commentPierce.equals("lásd még beslőségek sérülésekor Szívbénulás, Tüdősorvadás, Bélsorvadás BM varázslatok"))
 			fail("1-Not the correct Atea_Gorup comment " + commentPierce);
@@ -177,20 +177,20 @@ public class TestMagusDamageAidLogic {
 		
 		ObservableList<String> logWeapons = MagusDamageAidLogic.getDamageAidLogic().getWeaponTypes();
 		ObservableList<String> logAreaColl = MagusDamageAidLogic.getDamageAidLogic()
-				.getTheAreaCollectionOfChosenWeapon(logWeapons.get(2));			//VÁGÓFEGYVER
+				.getTheAreaCollection_OfChosenWeapon(logWeapons.get(2));			//VÁGÓFEGYVER
 		ObservableList<String> logAreaChosen_AreaList =
-				MagusDamageAidLogic.getTheStrictAreaRowFromChosenAreaGroup(logAreaColl.get(3));	//KÉZ AREA GROUP
+				MagusDamageAidLogic.getTheStrictAreaRow_OfChosenAreaGroup(logAreaColl.get(3));	//KÉZ AREA GROUP
 		ObservableList<String> logAreaChosen_HPList = MagusDamageAidLogic
-				.getDamageAidLogic().getTheStrinctAreaGroupHPRow();
+				.getDamageAidLogic().getTheStrinctAreaGroup_HPRow();
 		
 		String[] result = MagusDamageAidLogic.getDamageAidLogic()		//KÖNYÖK + 5-6 Ép
-				.getTheCellPariOfStrictAreaAndHP(logAreaChosen_AreaList.get(2), logAreaChosen_HPList.get(2));
+				.getTheCellPari_OfStrictAreaAndHP(logAreaChosen_AreaList.get(2), logAreaChosen_HPList.get(2));
 		
 		if(!result[0].equals("A penge mélyen belevág a könyökízületbe, használhatatlanná téve azt.") 
 				|| !result[1].equals("Mérsékelt vérzés. Mérsékelt fájdalom. Könyöktől lefelé a kar Teljes bénulása."))
 			fail("1-Not good cell pair errived");
 		
-		String commentShear	= MagusDamageAidLogic.getDamageAidLogic().getTheStirctCommentOfArea();
+		String commentShear	= MagusDamageAidLogic.getDamageAidLogic().getTheStirctComment_OfArea();
 		if(!commentShear.equals("Max 5 Ép"))
 			fail("2-Not good comment arrived " + commentShear);
 		

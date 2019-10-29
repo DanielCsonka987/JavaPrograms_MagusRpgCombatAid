@@ -8,7 +8,9 @@ import java.util.Random;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+/*
+ * MANAGES THE AID OF DAMAGE STATE-CALCULATION OF MAGUS-RPG
+ */
 public class MagusDamageAidLogic {
 
 	private static MagusDamageAidLogic logic;
@@ -57,6 +59,7 @@ public class MagusDamageAidLogic {
 	}
 	
 	/*
+	 * STEP 1
 	 * LOADS THE WEAPONS IN TO START THE SCREEN PROCESS
 	 * -> CREATES THE VIEW CONTETN TO COMBOBOX OF cmbBxWeaponTypes
 	 * -> FILLS UP THE MAP CONTAINER HERE
@@ -89,7 +92,13 @@ public class MagusDamageAidLogic {
 		return resToView;
 	}
 	
-	public static ObservableList<String> getTheAreaCollectionOfChosenWeapon(String chosenWeaponString){
+	/*
+	 * STEP 2
+	 * LOADS THE AREA COLLECTION THAT USER HAS CHOSEN
+	 * -> CREATES THE VIEW CONTENT FOR cmbBxAttackAreaGroup
+	 * -> FILLS UP THE MAP HERE
+	 */
+	public static ObservableList<String> getTheAreaCollection_OfChosenWeapon(String chosenWeaponString){
 		
 		fillUpWeaponTypesInNeed();
 		damage_ChosenAreaCollectionTableName = weaponTypes.get(chosenWeaponString);
@@ -98,8 +107,38 @@ public class MagusDamageAidLogic {
 		return getTheMapKeysAsList(chosen_AreaCollectionColumns);
 	}
 	
-
-	public static ObservableList<String> getTheStrictAreaRowFromChosenAreaGroup(String chosenAreaGroupNameToDamage){
+	/*
+	 * STEP 3
+	 * LOADS IN THE ROW OF CHOSEN AREA-GROUP FROM AREA-COLLECTION BY INNER INFO OF STEP 2
+	 * -> CREATES THE VIEW CONTETN OF HP-ROW cmbBxAttackStrength
+	 * -> FILLS UP THE MAP OF THAT HERE
+	 */
+	public static ObservableList<String> getTheStrinctAreaGroup_HPRow(){
+		
+		chosen_AreaCollectionHPRow = MagusDBInterface.getDBConnection()
+				.getSingleRowContnet_WithColumnTitle(queryToGetAreaCollectionHPRow_longer, new String[] {
+						damage_ChosenAreaCollectionTableName, damage_ChosenAreaGroupName  });
+		return getTheMapKeysAsList(chosen_AreaCollectionHPRow);
+	}
+	
+	/*
+	 * STEP 4
+	 * LOADS IN THE COMMENT OF THE CHOSEN AREA-GROUP BY INNER INFO OF STEP 2
+	 * -> CREATES THE VEIW CONTNENT OF lblInfoOfTable
+	 */
+	public static String getTheStictComment_OfAreaGroup(){
+		
+		return MagusDBInterface.getDBConnection()
+				.getTheValueOfASpecificCell(queryToGetAreaCollectionRowComment, new String[] { damage_ChosenAreaCollectionTableName, damage_ChosenAreaGroupTableName  });
+	}
+	
+	/*
+	 * STEP 5
+	 * LOADS IN THE AREAS OF THE CHOSEN AREA-GROUP THAT USER CAN (OPTINOAL) CHOOSE
+	 * -> CREATES THE VIEW CONTENT OF cmbBxAttackArea
+	 * -> FILLS UP THE MAP HERE
+	 */
+	public static ObservableList<String> getTheStrictAreaRow_OfChosenAreaGroup(String chosenAreaGroupNameToDamage){
 
 		damage_ChosenAreaGroupName = chosenAreaGroupNameToDamage;
 		damage_ChosenAreaGroupTableName = chosen_AreaCollectionColumns.get(chosenAreaGroupNameToDamage);
@@ -109,31 +148,16 @@ public class MagusDamageAidLogic {
 		return getTheMapKeysAsList(chosen_AreasAndDicesGoup);
 	}
 	
-	
-	public static String getTheStictCommentOfAreaGroup(){
-		
-		return MagusDBInterface.getDBConnection()
-				.getTheValueOfASpecificCell(queryToGetAreaCollectionRowComment, new String[] { damage_ChosenAreaCollectionTableName, damage_ChosenAreaGroupTableName  });
-	}
-	
-	public static String getTheStirctCommentOfArea(){
-		
-		return MagusDBInterface.getDBConnection()
-				.getTheValueOfASpecificCell(queryTOGetChosenAreaComment, new String[] {damage_ChosenAreaGroupTableName, damage_ChosenArea});
-	}
-	
-	public static ObservableList<String> getTheStrinctAreaGroupHPRow(){
-		
-		chosen_AreaCollectionHPRow = MagusDBInterface.getDBConnection()
-				.getSingleRowContnet_WithColumnTitle(queryToGetAreaCollectionHPRow_longer, new String[] {
-						damage_ChosenAreaCollectionTableName, damage_ChosenAreaGroupName  });
-		return getTheMapKeysAsList(chosen_AreaCollectionHPRow);
-	}
-	
-	public static String[] getTheCellPariOfStrictAreaAndHP(String chosenArea, String chosenHPValue){
+	/*
+	 * STEP 6
+	 * LOADS IN THE CHOSEN CELLS, THAT AREA-GROUP CONTAINS 
+	 * AND HAS CHOSEN BY RANDOM GENEAROR OR USER WITH THE ADDITIONAL AREA INFO
+	 * -> CRAETES THE VIEW CONTETNT OF txtAreaDescript AND txtAreaEffect 
+	 */
+	public static String[] getTheCellPari_OfStrictAreaAndHP(String chosenArea, String chosenHPValue){
 
 		String chosenHPHeader = "";
-		if(chosenArea == null){
+		if(chosenArea.equals("") || chosenArea == null){
 			Random rnd = new Random();
 			damage_ChosenArea = getBackKeyAreaValueByItsValueDice(rnd.nextInt(10));
 		} else {
@@ -148,8 +172,11 @@ public class MagusDamageAidLogic {
 				.getTheValuePairOfSpecificCells(queryToGetChosenAreaCellPair, new String[] {
 						chosenHPHeader, chosenAffectHeader, damage_ChosenAreaGroupTableName, damage_ChosenArea });
 	}
-
-	public static String[] getTheCellPariOfStrictAreaAndHP(Integer dice, String chosenHPValue){
+	
+	/*
+	 * SPTE 6b - THIS IS FOR TEST PURPOPSES
+	 */
+	public static String[] getTheCellPari_OfStrictAreaAndHP(Integer dice, String chosenHPValue){
 		
 		String chosenHPHeader = "";
 		damage_ChosenArea = getBackKeyAreaValueByItsValueDice(dice);
@@ -188,4 +215,29 @@ public class MagusDamageAidLogic {
 		strw.flush();
 		return strw.toString();
 	}
+	
+	/*
+	 * STEP 7
+	 * LOADS IN THE COMMENT OF THE CHOSEN AREA HAS
+	 * -> CREATES THE VIEW CONTENT OF lblInfoOfRow
+	 */
+	public static String getTheStirctComment_OfArea(){
+		
+		return MagusDBInterface.getDBConnection()
+				.getTheValueOfASpecificCell(queryTOGetChosenAreaComment, new String[] {damage_ChosenAreaGroupTableName, damage_ChosenArea});
+	}
+
+	/*
+	 * STEP 8
+	 * LOADS IN THE AREA INFO, THAT RANDOM OR USE HAS CHOSEN
+	 * -> CREATES THE VIEW CONTENT OF lblAreaInfo;
+	 */
+	public static String getTheChosenArea_OfManagedProcess(){
+		
+		return damage_ChosenArea;
+	}
+	
+
+	
+
 }

@@ -1,6 +1,7 @@
 package application;
 
 import java.awt.Desktop.Action;
+import java.io.StringWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class MainWindowController implements Initializable{
+
 
     @FXML
     private Tab damageAid;
@@ -59,11 +61,15 @@ public class MainWindowController implements Initializable{
     @FXML
     private Label lblInfoOfRow;
 
-
+    @FXML
+    private Label lblAreaInfo;
+    
     private MagusDamageAidLogic service;
 	private String chosenWeaponType;
 	private String chosenAreaGroup;
 	private String chosenHPValue;
+	private Integer textBreakLineLength = 40;
+	private Integer lblBreakLineLength = 25;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -90,9 +96,9 @@ public class MainWindowController implements Initializable{
     	if(fillingInStatesRevisor(FormCompliteness.CHOSEN_HPorAREA))
     		return;
     	
-    	String[] cellPairResult = service.getTheCellPariOfStrictAreaAndHP("", chosenHPValue);
-    	String cellCommentResult = service.getTheStirctCommentOfArea();
-    	loadDetailsToFields(cellPairResult, cellCommentResult);
+    	String[] cellPairResult = service.getTheCellPari_OfStrictAreaAndHP("", chosenHPValue);
+    	String cellCommentResult = service.getTheStirctComment_OfArea();
+    	loadDetailsToAreass(cellPairResult, cellCommentResult);
     }
 
     @FXML
@@ -102,9 +108,9 @@ public class MainWindowController implements Initializable{
     		return;
     	String chosenArea = cmbBxAttackArea.getSelectionModel().getSelectedItem();
     	
-    	String[] cellPairResult = service.getTheCellPariOfStrictAreaAndHP(chosenArea, chosenHPValue);
-    	String cellCommentResult = service.getTheStirctCommentOfArea();
-    	loadDetailsToFields(cellPairResult, cellCommentResult);
+    	String[] cellPairResult = service.getTheCellPari_OfStrictAreaAndHP(chosenArea, chosenHPValue);
+    	String cellCommentResult = service.getTheStirctComment_OfArea();
+    	loadDetailsToAreass(cellPairResult, cellCommentResult);
     }
 
     @FXML
@@ -113,9 +119,11 @@ public class MainWindowController implements Initializable{
     	if(fillingInStatesRevisor(FormCompliteness.CHOSEN_AREAGROUP))
     		return;
     	chosenAreaGroup = cmbBxAttackAreaGroup.getSelectionModel().getSelectedItem();
+    	cmbBxAttackArea.itemsProperty().set(service.getTheStrictAreaRow_OfChosenAreaGroup(chosenAreaGroup));
     	cmbBxAttackStrength.itemsProperty()
-			.set(service.getTheStrinctAreaGroupHPRow());
-    	cmbBxAttackArea.itemsProperty().set(service.getTheStrictAreaRowFromChosenAreaGroup(chosenAreaGroup));
+			.set(service.getTheStrinctAreaGroup_HPRow());
+    	String tableComment = service.getTheStictComment_OfAreaGroup();
+    	lblInfoOfTable.setText(breakLinesOfString_ToBeDecorative(tableComment, false));
     }
 
     @FXML
@@ -125,9 +133,7 @@ public class MainWindowController implements Initializable{
     		return;
     	chosenWeaponType = cmbBxWeaponTypes.getSelectionModel().getSelectedItem();
     	cmbBxAttackAreaGroup.itemsProperty()
-    		.set(service.getTheAreaCollectionOfChosenWeapon(chosenWeaponType));;
-    	String tableComment = service.getTheStictCommentOfAreaGroup();
-    	lblInfoOfTable.setText(tableComment);
+    		.set(service.getTheAreaCollection_OfChosenWeapon(chosenWeaponType));;
     }
 
     private Boolean fillingInStatesRevisor(FormCompliteness state){
@@ -143,6 +149,7 @@ public class MainWindowController implements Initializable{
     	if(state == FormCompliteness.CHOSEN_HPorAREA){
     		if(cmbBxAttackStrength.getSelectionModel().isEmpty())
     			return true;
+    		chosenHPValue = cmbBxAttackStrength.getSelectionModel().getSelectedItem();
     	}
     	if(state == FormCompliteness.CHOSEN_AREA){
     		if(cmbBxAttackArea.getSelectionModel().isEmpty())
@@ -153,10 +160,35 @@ public class MainWindowController implements Initializable{
     
     private enum FormCompliteness { CHOSEN_WEAPON, CHOSEN_AREAGROUP, CHOSEN_HPorAREA, CHOSEN_AREA }
     
-    private void loadDetailsToFields(String[] cellPair, String comment){
-    	txtAreaDescript.setText(cellPair[0]);
-    	txtAreaEffect.setText(cellPair[1]);
-    	lblInfoOfRow.setText(comment);
+    private void loadDetailsToAreass(String[] cellPair, String comment){
+    	txtAreaDescript.setText(breakLinesOfString_ToBeDecorative(cellPair[0], true));
+    	txtAreaEffect.setText(breakLinesOfString_ToBeDecorative(cellPair[1], true));
+    	lblInfoOfRow.setText(breakLinesOfString_ToBeDecorative(comment, false));
+    	lblAreaInfo.setText(service.getTheChosenArea_OfManagedProcess());
+    }
+    
+    private String breakLinesOfString_ToBeDecorative(String datas, Boolean type){
+    	
+    	Integer actLenghtPermitted = type?textBreakLineLength:lblBreakLineLength;
+    	if(datas == null)
+    		return "";
+    	if(datas.length() < actLenghtPermitted)
+    		return datas;
+    	
+    	StringWriter strwr = new StringWriter();
+    	Integer rowCounter = 1;
+    	String[] pieces = datas.split(" ");
+    	for(int i = 0; i < pieces.length; i++){
+    		strwr.write(pieces[i]);
+    		if(strwr.getBuffer().length() >= (actLenghtPermitted * rowCounter)){
+    			strwr.write("\n");
+    			rowCounter++;
+    		} else {
+    			strwr.write(" ");
+    		}
+    	}
+    	strwr.flush();
+    	return strwr.toString();
     }
     
 }
