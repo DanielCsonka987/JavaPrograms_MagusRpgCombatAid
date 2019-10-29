@@ -158,6 +158,9 @@ public class MagusDBInterface implements IDaoDamageAid{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
+		
+		if(result[1] == null)
+			result[1] = "";
 		return result;
 	}
 	

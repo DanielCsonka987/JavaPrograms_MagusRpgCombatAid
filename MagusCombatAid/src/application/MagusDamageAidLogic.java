@@ -192,11 +192,20 @@ public class MagusDamageAidLogic {
 	}
 	
 	private static String getBackKeyAreaValueByItsValueDice(Integer diceRoll) {
-
+		//System.out.println("Rolling "+diceRoll);
 		Iterator it = chosen_AreasAndDicesGoup.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry pair = (Map.Entry) it.next();
 			String diceValueFromList = pair.getValue().toString();
+			//System.out.println("In list " + diceValueFromList);
+			if(diceValueFromList.contains("-")){
+				String[] temp = diceValueFromList.split("-");
+				Integer down = Integer.parseInt(temp[0]);
+				Integer up = Integer.parseInt(temp[1].substring(0, 1));
+				//System.out.println("Interval: " + down + " " + up);
+				if(down <= diceRoll && up >= diceRoll)
+					return (String) pair.getKey();
+			}
 			if (diceValueFromList.contains(diceRoll.toString())) {
 				return (String) pair.getKey();
 			}
